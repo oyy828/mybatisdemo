@@ -25,4 +25,5 @@ public class BaseService {
         SqlSession sqlSession = build.openSession();
         return sqlSession;
     }
+    //hhaa
 }
