@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.MenuInfoMapper">
+    <resultMap id="menuInfoMap" type="com.qf.pojo.MenuInfo">
+        <id property="mid" column="mid"></id>
+        <result property="menuname" column="menuname"></result>
+        <result property="menuicon" column="menuicon"></result>
+        <result property="menuurl" column="menu_url"></result>
+        <result property="parentid" column="parentid"></result>
+        <collection property="childMenus" ofType="com.qf.pojo.MenuInfo">
+            <id property="cmid" column="mid"></id>
+            <result property="cname" column="menuname"></result>
+            <result property="cicon" column="menuicon"></result>
+            <result property="curl" column="menu_url"></result>
+            <result property="cpid" column="parentid"></result>
+        </collection>
+    </resultMap>
+    <select  id="listParentMenu" resultMap="menuInfoMap">
+            select m1.*,m2.mid cmid,m2.menuname cname,m2.menuicon cicon,m2.menu_url curl,m2.parentid cpid
+        from menuinfo m1,menuinfo m2 where m1.parentid is null and m1.mid = m2.parentid
+    </select>
+
+</mapper>
